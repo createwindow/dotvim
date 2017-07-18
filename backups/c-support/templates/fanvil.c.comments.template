@@ -1,0 +1,232 @@
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.end-of-line-comment == append ==
+/* <CURSOR> */
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.frame ==
+/*-----------------------------------------------------------------------------
+ *  <CURSOR>
+ *-----------------------------------------------------------------------------*/
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.function ==
+/******************************************************************************
+ * FUNCTION:    |?FUNCTION_NAME|
+ * DESCRIPTION: <CURSOR>
+ * PARAMETERS:
+ *   [i]
+ * RETURNS:
+ * NOTE:
+ ******************************************************************************/
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.method ==
+/*
+ *--------------------------------------------------------------------------------------
+ *       Class:  |?CLASSNAME|
+ *      Method:  |?CLASSNAME| :: |?METHODNAME|
+ * Description:  <CURSOR>
+ *--------------------------------------------------------------------------------------
+ */
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.class ==
+/*
+ * =====================================================================================
+ *        Class:  |?CLASSNAME|
+ *  Description:  <CURSOR>
+ * =====================================================================================
+ */
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-description == start ==
+/*********************************************************************
+* LEGAL DISCLAIMER
+*
+* (Header of FANVIL Software/Firmware Release or Documentation)
+*
+* BY OPENING OR USING THIS FILE, BUYER HEREBY UNEQUIVOCALLY 
+* ACKNOWLEDGES AND AGREES THAT THE SOFTWARE/FIRMWARE AND ITS 
+* DOCUMENTATIONS ("FANVIL SOFTWARE") RECEIVED FROM FANVIL AND/OR 
+* ITS REPRESENTATIVES ARE PROVIDED TO BUYER ON AN "AS-IS" BASIS ONLY. 
+* FANVIL EXPRESSLY DISCLAIMS ANY AND ALL WARRANTIES, EXPRESS OR 
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF 
+* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR 
+* NONINFRINGEMENT. NEITHER DOES FANVIL PROVIDE ANY WARRANTY 
+* WHATSOEVER WITH RESPECT TO THE SOFTWARE OF ANY THIRD PARTY WHICH 
+* MAY BE USED BY, INCORPORATED IN, OR SUPPLIED WITH THE FANVIL 
+* SOFTWARE, AND BUYER AGREES TO LOOK ONLY TO SUCH THIRD PARTY FOR ANY
+* WARRANTY CLAIM RELATING THERETO. FANVIL SHALL ALSO NOT BE 
+* RESPONSIBLE FOR ANY FANVIL SOFTWARE RELEASES MADE TO BUYER'S 
+* SPECIFICATION OR TO CONFORM TO A PARTICULAR STANDARD OR OPEN FORUM.
+*
+* BUYER'S SOLE AND EXCLUSIVE REMEDY AND FANVIL'S ENTIRE AND 
+* CUMULATIVE LIABILITY WITH RESPECT TO THE FANVIL SOFTWARE RELEASED 
+* HEREUNDER WILL BE, AT FANVIL'S OPTION, TO REVISE OR REPLACE THE 
+* FANVIL SOFTWARE AT ISSUE, OR REFUND ANY SOFTWARE LICENSE FEES OR 
+* SERVICE CHARGE PAID BY BUYER TO FANVIL FOR SUCH FANVIL SOFTWARE
+* AT ISSUE.
+*
+* THE TRANSACTION CONTEMPLATED HEREUNDER SHALL BE CONSTRUED IN 
+* ACCORDANCE WITH THE LAWS OF THE PEOPLE'S REPUBLIC OF CHINA(PRC), 
+* EXCLUDING ITS CONFLICT OF LAWS PRINCIPLES.
+**********************************************************************
+*/
+
+/*
+ *  Filename:  |FILENAME|
+ *
+ *  Author:  |AUTHOR| 
+ *
+ *  Last Revision Date:  |DATE| |TIME|
+ *
+ *  Description:  <CURSOR>
+ *
+ */
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-description-header == start ==
+/*********************************************************************
+* LEGAL DISCLAIMER
+*
+* (Header of FANVIL Software/Firmware Release or Documentation)
+*
+* BY OPENING OR USING THIS FILE, BUYER HEREBY UNEQUIVOCALLY 
+* ACKNOWLEDGES AND AGREES THAT THE SOFTWARE/FIRMWARE AND ITS 
+* DOCUMENTATIONS ("FANVIL SOFTWARE") RECEIVED FROM FANVIL AND/OR 
+* ITS REPRESENTATIVES ARE PROVIDED TO BUYER ON AN "AS-IS" BASIS ONLY. 
+* FANVIL EXPRESSLY DISCLAIMS ANY AND ALL WARRANTIES, EXPRESS OR 
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF 
+* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR 
+* NONINFRINGEMENT. NEITHER DOES FANVIL PROVIDE ANY WARRANTY 
+* WHATSOEVER WITH RESPECT TO THE SOFTWARE OF ANY THIRD PARTY WHICH 
+* MAY BE USED BY, INCORPORATED IN, OR SUPPLIED WITH THE FANVIL 
+* SOFTWARE, AND BUYER AGREES TO LOOK ONLY TO SUCH THIRD PARTY FOR ANY
+* WARRANTY CLAIM RELATING THERETO. FANVIL SHALL ALSO NOT BE 
+* RESPONSIBLE FOR ANY FANVIL SOFTWARE RELEASES MADE TO BUYER'S 
+* SPECIFICATION OR TO CONFORM TO A PARTICULAR STANDARD OR OPEN FORUM.
+*
+* BUYER'S SOLE AND EXCLUSIVE REMEDY AND FANVIL'S ENTIRE AND 
+* CUMULATIVE LIABILITY WITH RESPECT TO THE FANVIL SOFTWARE RELEASED 
+* HEREUNDER WILL BE, AT FANVIL'S OPTION, TO REVISE OR REPLACE THE 
+* FANVIL SOFTWARE AT ISSUE, OR REFUND ANY SOFTWARE LICENSE FEES OR 
+* SERVICE CHARGE PAID BY BUYER TO FANVIL FOR SUCH FANVIL SOFTWARE
+* AT ISSUE.
+*
+* THE TRANSACTION CONTEMPLATED HEREUNDER SHALL BE CONSTRUED IN 
+* ACCORDANCE WITH THE LAWS OF THE STATE OF CALIFORNIA, USA, EXCLUDING
+* ITS CONFLICT OF LAWS PRINCIPLES.
+**********************************************************************
+*/
+
+/*
+ *  Filename:  |FILENAME|
+ *
+ *  Author:  |AUTHOR| 
+ *
+ *  Last Revision Date:  |DATE| |TIME|
+ *
+ *  Description:  <CURSOR>
+ *
+ */
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-cpp-header-includes  == 
+/* #####   HEADER FILE INCLUDES   ################################################### */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-cpp-macros  == 
+/* #####   MACROS  -  LOCAL TO THIS SOURCE FILE   ################################### */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-cpp-typedefs  == 
+/* #####   TYPE DEFINITIONS  -  LOCAL TO THIS SOURCE FILE   ######################### */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-cpp-data-types  == 
+/* #####   DATA TYPES  -  LOCAL TO THIS SOURCE FILE   ############################### */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-cpp-class-defs  == 
+/* #####   CLASS DEFINITIONS  -  LOCAL TO THIS SOURCE FILE   ######################## */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-cpp-local-variables  == 
+/* #####   VARIABLES  -  LOCAL TO THIS SOURCE FILE   ################################ */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-cpp-prototypes  == 
+/* #####   PROTOTYPES  -  LOCAL TO THIS SOURCE FILE   ############################### */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-cpp-function-defs-exported  == 
+/* #####   FUNCTION DEFINITIONS  -  EXPORTED FUNCTIONS   ############################ */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-cpp-function-defs-local  == 
+/* #####   FUNCTION DEFINITIONS  -  LOCAL TO THIS SOURCE FILE   ##################### */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-cpp-class-implementations-exported  == 
+/* #####   CLASS IMPLEMENTATIONS  -  EXPORTED CLASSES   ############################# */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-cpp-class-implementations-local  == 
+/* #####   CLASS IMPLEMENTATIONS  -  LOCAL CLASSES   ################################ */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-hpp-header-includes  == 
+/* #####   HEADER FILE INCLUDES   ################################################### */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-hpp-macros  ==
+/* #####   EXPORTED MACROS   ######################################################## */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-hpp-exported-typedefs  ==
+/* #####   EXPORTED TYPE DEFINITIONS   ############################################## */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-hpp-exported-data-types  ==
+/* #####   EXPORTED DATA TYPES   #################################################### */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-hpp-exported-class-defs  ==
+/* #####   EXPORTED CLASS DEFINITIONS   ############################################# */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-hpp-exported-variables  ==
+/* #####   EXPORTED VARIABLES   ##################################################### */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.file-section-hpp-exported-function-declarations  ==
+/* #####   EXPORTED FUNCTION DECLARATIONS   ######################################### */
+
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.keyword-bug == append ==
+ /* :BUG:|DATE| |TIME|:|AUTHORREF|: <CURSOR> */
+== comment.keyword-compiler == append ==
+ /* :COMPILER:|DATE| |TIME|:|AUTHORREF|: <CURSOR> */
+== comment.keyword-todo == append ==
+ /* :TODO:|DATE| |TIME|:|AUTHORREF|: <CURSOR> */
+== comment.keyword-tricky == append ==
+ /* :TRICKY:|DATE| |TIME|:|AUTHORREF|: <CURSOR> */
+== comment.keyword-warning == append ==
+ /* :WARNING:|DATE| |TIME|:|AUTHORREF|: <CURSOR> */
+== comment.keyword-workaround == append ==
+ /* :WORKAROUND:|DATE| |TIME|:|AUTHORREF|: <CURSOR> */
+== comment.keyword-keyword == append ==
+ /* :|?KEYWORD:u|:|DATE| |TIME|:|AUTHORREF|: <CURSOR> */
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+== comment.special-empty == append ==
+ /* EMPTY */<CURSOR>
+== comment.special-fall-through == append ==
+ /* FALL THROUGH */<CURSOR>
+== comment.special-implicit-type-conversion == append ==
+ /* IMPLICIT TYPE CONVERSION */<CURSOR>
+== comment.special-no-return == append ==
+ /* NO RETURN */<CURSOR>
+== comment.special-not-reached == append ==
+ /* NOT REACHED */<CURSOR>
+== comment.special-remains-to-be-implemented == append ==
+ /* REMAINS TO BE IMPLEMENTED */<CURSOR>
+== comment.special-constant-type-is-long == append ==
+ /* constant type is long */<CURSOR>
+== comment.special-constant-type-is-unsigned == append ==
+ /* constant type is unsigned */<CURSOR>
+== comment.special-constant-type-is-unsigned-long == append ==
+ /* constant type is unsigned long */<CURSOR>
+$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,9 @@
+[PJSIP2.4]
+
+option:ctags_params="--langmap=c:.c.h --languages=c --fields=+lS"
+/home/mike/workspace/open_source/pjsip_2.4
+
+option:ctags_params="--languages=c++, --fields=+lS"
+/home/mike/workspace/open_source/pjsip_2.4/pjsip/src/pjsua2
+/home/mike/workspace/open_source/pjsip_2.4/pjsip/src/pjsua2-test
+

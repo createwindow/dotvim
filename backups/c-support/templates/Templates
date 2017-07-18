@@ -1,0 +1,30 @@
+$
+$ =============================================================
+$ ========== USER MACROS ======================================
+$ =============================================================
+$
+|AUTHOR|    = yiguo 
+|AUTHORREF| = 
+|EMAIL|     = 
+|COMPANY|   = 
+|COPYRIGHT| = Copyright (c) |YEAR|, |AUTHOR|
+|STYLE|     = default
+$
+$ =============================================================
+$ ========== FILE INCLUDES ====================================
+$ =============================================================
+$
+|includefile| = fanvil.c.comments.template
+|includefile| = yiguo.c.cpp.template
+|includefile| = yiguo.c.idioms.template
+|includefile| = yiguo.c.preprocessor.template
+|includefile| = yiguo.c.statements.template
+$
+== IF |STYLE| IS CPP ==
+|includefile| = yiguo.cpp.comments.template
+|includefile| = yiguo.cpp.cpp.template
+|includefile| = yiguo.cpp.idioms.template
+|includefile| = yiguo.cpp.preprocessor.template
+|includefile| = yiguo.cpp.statements.template
+== ENDIF ==
+$

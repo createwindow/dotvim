@@ -1,0 +1,750 @@
+" allow backspacing over everything in insert mode
+" 1. indent: use backspace to delete autoindent space
+" 2. eol: use backspace to merge 2 lines
+" 3. start: use backsapce to delete previous inputs
+set backspace=indent,eol,start
+set nobackup		" do not keep a backup file, use versions instead
+set history=50		" keep 50 lines of command line history
+set ruler		    " show the cursor position all the time
+set showcmd		    " display incomplete commands
+set incsearch		" do incremental searching
+set wildmenu        " show a navigable menu for tab completion
+set number
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set softtabstop=4
+set smarttab
+set ch=2            " Make command line two lines high
+set encoding=utf-8
+let &termencoding=&encoding
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,latin1
+set cursorline
+
+winpos 200 100      " initial window position on the screen
+set lines=50        " initial height
+set columns=120     " initial width
+
+" Formatting the statusline
+set laststatus=2 "allways have a statusline
+" set statusline=%f "Path to the file in the buffer, as typed or relative to current directory
+set statusline=%t "File name (tail) of file in the buffer
+set statusline+=%h%m%r%w "Help buffer, Modified, Readonly, Preview window flags
+set statusline+=\[%{&fenc}\ %{&fileformat}\]
+" set statusline+=\ %{EchoFuncGetStatusLine()} "show Echofunc messages in status line
+set statusline+=%= "Separation point between left and right aligned items
+set statusline+=\ %-24.24(%l-%L,%c%) "minwid, maxwidth=24, '(','%)'for setting width and alignment
+set statusline+=%3p%% "Percentage through file in lines
+
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+set t_Co=256
+syntax enable
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+  set guifont=Monospace\ 9
+  " set guifont=Anonymous\ Pro:h11
+  " set gfw=Microsoft\ YaHei "guifontwide
+  set gfw=NSimSun "guifontwide fc-list :lang=zh-cn
+  " no scroll bar
+  set guioptions-=l
+  set guioptions-=L
+  set guioptions-=r
+  set guioptions-=R
+endif
+
+" Enable file type detection.
+" Use the default filetype settings, so that mail gets 'tw' set to 72,
+" 'cindent' is on in C files, etc.
+" Also load indent files, to automatically do language-dependent indenting.
+filetype plugin indent on
+
+"----Folding
+" set fdm=syntax
+set fdm=indent
+"Don't fold code automatically when vim is opened
+set foldlevel=100
+
+"----new-omni-completion
+" based on ctags
+set completeopt=longest,menu
+
+let mapleader = ","
+
+augroup quickfixWinOpen
+    autocmd QuickFixCmdPost * botright copen 8
+augroup END
+
+" set background=light
+" colorscheme solarized
+
+colorscheme lucius
+" LuciusLightLowContrast
+" LuciusWhite
+" LuciusLight
+" LuciusDark
+LuciusDarkLowContrast
+
+if exists('+colorcolumn')
+  set colorcolumn=96
+  highlight ColorColumn ctermbg=blue ctermfg=white guibg=#dedede
+endif
+
+"----------------------move cursor to windows--------------------
+noremap <C-J> <C-W>j
+noremap <C-K> <C-W>k
+noremap <C-H> <C-W>h
+noremap <C-L> <C-W>l
+
+"------------------------set tags--------------------------------
+nnoremap <esc> :nohl<cr>
+
+" "------------------------ctrl+j to exit insert mode--------------
+" imap <C-j> <ESC> " not good for cppman
+
+
+"----------------------GNU Global with Cscope--------------------
+" NOTE: we MUST open files in the directory or sub-directory where GTAGS
+" exits, otherwise [cs add] will fail.
+
+" let ctrl+] give a list of candidate
+set cscopetag
+set cscopeprg=gtags-cscope
+
+" GtagsCscope_GtagsRoot(), using global -pq", is much slower.
+function! FindGtags(file)
+    " let start = reltime()
+    let dir = fnamemodify(a:file, ":p:h")
+    exe "silent !cd " . dir
+    while 1
+        let guess = dir . "/GTAGS"
+        if filereadable(guess)
+            " echo('guess is: ' . guess)
+            " echo reltimestr(reltime(start)) "show exec time
+            return [guess]
+        elseif dir == '/'
+            return [""]
+        endif
+
+        let dir = fnamemodify(dir, ":h")
+    endwhile
+endfunc
+" au BufEnter * call FindGtags(expand("<afile>")) "just for test
+
+function! AddGtags(file)
+    let [dbfile] = FindGtags(a:file)
+    if dbfile == ""
+        return
+    endif
+    set nocsverb " suppress 'duplicate connection' error  
+    exe "cs add " . dbfile 
+    set csverb
+endfunc
+au BufEnter * call AddGtags(expand("<afile>"))
+
+function! UpdateGtags(file)
+    let [dbfile] = FindGtags(a:file)
+    if dbfile == ""
+        return
+    endif
+    let filepath = fnamemodify(a:file, ":p:h")
+    exe "silent !cd " . filepath . " && global -u &> /dev/null &"
+    " WARNING: We do NOT change the working directory to the previous one.
+endfunction 
+" au BufWritePost * call UpdateGtags(expand("<afile>"))
+
+
+"-----------------------gtags.vim-----------------------------------
+let Gtags_Auto_Map = 0 "confict with ctrlp
+
+"-----------------------CSCOPE-----------------------------------
+" '-' implies previous results clearance, use quickfix window to show cscope 
+" results
+" :cs s to see whether a cscope database is linked. If not, we need cs add
+" ***/cscope.out
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+" Find this C symbol
+nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+" Find this definition
+nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+" Find functions calling this function
+nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+" Find this text string
+nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+" Find this egrep pattern
+nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+" Find this file
+nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+" Find files #including this file
+nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+" Find functions called by this function
+nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+"------------------------ChangeFonts---------------------------------
+let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
+let s:minfontsize = 6
+let s:maxfontsize = 16
+function! AdjustFontSize(amount)
+  if has("gui_gtk2") && has("gui_running")
+    let fontname = substitute(&guifont, s:pattern, '\1', '')
+    let cursize = substitute(&guifont, s:pattern, '\2', '')
+    let newsize = cursize + a:amount
+    if (newsize >= s:minfontsize) && (newsize <= s:maxfontsize)
+      let newfont = fontname . newsize
+      let &guifont = newfont
+    endif
+  else
+    echoerr "You need to run the GTK2 version of Vim to use this function."
+  endif
+endfunction
+
+function! LargerFont()
+  call AdjustFontSize(1)
+endfunction
+command! LargerFont call LargerFont()
+
+function! SmallerFont()
+  call AdjustFontSize(-1)
+endfunction
+command! SmallerFont call SmallerFont()
+
+nmap <a-+> :LargerFont<CR>
+nmap <a-/> :SmallerFont<CR>
+
+
+
+
+"-------------------------------------------------------------------------------
+"-------------------------------- VIM SCRIPTS ----------------------------------
+"-------------------------------------------------------------------------------
+
+" ----a.vim
+" nnoremap <silent><F11> :A<CR>
+" ----fswitch
+nmap <silent> <F12> :FSHere<cr>
+
+" ----c.vim
+let g:C_MapLeader  = ','
+let g:C_GlobalTemplateFile = '~/vimfiles/bakfiles/c-support/template/Templates'
+" <c-j> is mapped to move cursor to windows, so this functionality should be
+" turn off.
+let g:C_Ctrl_j = 'off'
+
+" ----easymotion 
+"{{{
+" The default behavior is to shade the text following the cursor (forward
+" motions) or preceding the cursor (backward motions) to make the motion targets
+" more visible.
+let g:EasyMotion_do_shade = 1
+
+" Link the colors to highlighting groups that are available in almost every 
+" color scheme.
+hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade  Comment
+"}}}
+
+" ----grep.vim
+nnoremap <silent><F3> :Rgrep<CR>
+let Grep_Default_Filelist = '*.c *.cpp *.java *.asm *.h *.txt' 
+
+" ----ctrlp
+"{{{
+" Open CtrlP in find buffer mode.
+nmap <leader>b :CtrlPBuffer<CR>
+
+" Set this to 1 to set regexp search as the default: >
+let g:ctrlp_regexp = 1
+" search by filename (as opposed to full path)
+let g:ctrlp_by_filename = 1 
+" c - the directory of the current file.
+" a - like "c", but only applies when the current working directory outside of
+" CtrlP isn't a direct ancestor of the directory of the current file.
+" r - the nearest ancestor that contains one of these directories or files:
+" .git .hg .svn .bzr _darcs
+" w - begin finding a root from the current working directory outside of CtrlP
+" instead of from the directory of the current file (default). Only applies
+" when "r" is also present.
+" 0 or <empty> - disable this feature.
+let g:ctrlp_working_path_mode = 'ra' 
+let g:ctrlp_extensions = ['bookmarkdir']
+let g:ctrlp_match_window = 'max:20,results:20'
+
+" delete buffers <c-l>. Disable the key mapping already use in CtrlP, then use
+" it to delete buffers.
+let g:ctrlp_prompt_mappings = { 'PrtCurRight()': ['<right>'] }
+let g:ctrlp_buffer_func = { 'enter': 'MyCtrlPMappings' }
+func! MyCtrlPMappings()
+    nnoremap <buffer> <silent> <c-l> :call <sid>DeleteBuffer()<cr>
+endfunc
+func! s:DeleteBuffer()
+    let line = getline('.')
+    let bufid = line =~ '\[\d\+\*No Name\]$' ? str2nr(matchstr(line, '\d\+'))
+        \ : fnamemodify(line[2:], ':p')
+    exec "bd" bufid
+    exec "norm \<F5>"
+endfunc
+"}}}
+
+" Use Silver Searcher for CtrlP plugin (if available) Fallback to git ls-files 
+" for fast listing. Because we use fast strategies, disable caching.
+" Ignore the VCS ignore files of one dir automatically. You should set up a
+" global .agignore file to ignore what you want to, since adding ignore
+" options to greprg or ctrlp_user_command does NOT work.
+if executable('ag')
+    " let g:ctrlp_use_caching = 0
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+ 
+" does not apply when a command defined with |g:ctrlp_user_command| is being used.
+" let g:ctrlp_custom_ignore = {
+  " \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  " \ 'file': '\v\.(d|o)$',
+  " \ }
+
+" ----indexer
+"{{{
+let g:indexer_disableCtagsWarning = 1
+"}}}
+
+" ----nerdcommenter
+"{{{
+let g:NERDMenuMode = 0
+let g:NERDSpaceDelims = 1
+"}}}
+
+" ----tagbar
+"{{{
+nnoremap <silent> tb :TagbarToggle<CR>
+
+" Open it on the left
+let g:tagbar_left = 1
+
+" Width of the Tagbar window in characters.
+let g:tagbar_width = 48
+
+" If this option is set the Vim window will be expanded by the width of the 
+" Tagbar window if using a GUI version of Vim.
+let g:tagbar_expand = 1
+
+" If this variable is set and the current tag is inside of a closed fold then
+" the folds will be opened as much as needed for the tag to be visible so it can
+" be highlighted.
+let g:tagbar_autoshowtag = 1
+
+" If this option is set the tags are sorted according to their name. If it is
+" unset they are sorted according to their order in the source file.
+let g:tagbar_sort = 0
+
+" let g:tagbar_type_c = {
+    " \ 'kinds' : [
+        " \ 'd:macros:1:0',
+        " \ 'p:prototypes:1:0',
+        " \ 'g:enums:1:0',
+        " \ 'e:enumerators:1:0',
+        " \ 't:typedefs:0:0',
+        " \ 's:structs',
+        " \ 'u:unions',
+        " \ 'm:members:0:0',
+        " \ 'v:variables:0:0',
+        " \ 'f:functions',
+    " \ ],
+" \ }
+
+let g:tagbar_type_c = {
+    \ 'kinds' : [
+        \ 'd:macros:1:0',
+        \ 'p:prototypes:1:0',
+        \ 'g:enums:1:0',
+        \ 'e:enumerators:1:0',
+        \ 't:typedefs:0:0',
+        \ 's:structs:1:0',
+        \ 'u:unions:1:0',
+        \ 'm:members:0:0',
+        \ 'v:variables:0:0',
+        \ 'f:functions',
+    \ ],
+\ }
+
+let g:tagbar_type_cpp = {
+    \ 'kinds' : [
+        \ 'd:macros:1:0',
+        \ 'p:prototypes:1:0',
+        \ 'g:enums:1:0',
+        \ 'e:enumerators:1:0',
+        \ 't:typedefs:0:0',
+        \ 'n:namespaces',
+        \ 'c:classes',
+        \ 's:structs:1:0',
+        \ 'u:unions:1:0',
+        \ 'f:functions',
+        \ 'm:members:1:0',
+        \ 'v:variables:0:0',
+    \ ],
+\ }
+"}}}
+
+" ----yankring
+"{{{
+" Display all the entries in the yankring.
+nmap <C-y> :YRShow<CR>
+"nmap <Leader>ys :YRShow<CR>
+
+" Clear the YankRing to start over.
+nmap <Leader>yc :YRClear<CR>
+
+" Controls how many elements to save in the yankring.
+let g:yankring_max_history = 100
+
+" When the YankRing window is opened, each element is displayed on a separate 
+" line. Since each yank could be very large, the display of the element is 
+" limited to the above default (500).
+let g:yankring_max_display = 100
+
+" Cycle through the yankring, replacing the previously pasted text with the 
+" previous yanked text. 
+let g:yankring_replace_n_pkey = '<Leader>yp'
+let g:yankring_replace_n_nkey = '<Leader>yn'
+"}}}
+
+" ----add file header
+"{{{
+map <F4> :call AddHeaderFileHeader()<cr>
+map <F5> :call AddSourceFileHeader()<cr>
+
+" TODO: read the header from the template file; use a VIM script to do the job. 
+function _AddHeaderFileHeader()
+"     call append(0,"\/*******************************************************************************")
+    " call append(1," * LEGAL DISCLAIMER")
+    " call append(2," * ")
+    " call append(3," * (Header of FANVIL Software/Firmware Release or Documentation)")
+    " call append(4," * ")
+    " call append(5," * BY OPENING OR USING THIS FILE, BUYER HEREBY UNEQUIVOCALLY ACKNOWLEDGES AND ")
+    " call append(6," * AGREES THAT THE SOFTWARE/FIRMWARE AND ITS DOCUMENTATIONS (\"FANVIL SOFTWARE\")")
+    " call append(7," * RECEIVED FROM FANVIL AND/OR ITS REPRESENTATIVES ARE PROVIDED TO BUYER ON AN ")
+    " call append(8," * \"AS-IS\" BASIS ONLY. FANVIL EXPRESSLY DISCLAIMS ANY AND ALL WARRANTIES, ")
+    " call append(9," * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF ")
+    " call append(10," * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NONINFRINGEMENT. NEITHER")
+    " call append(11," * DOES FANVIL PROVIDE ANY WARRANTY WHATSOEVER WITH RESPECT TO THE SOFTWARE OF ")
+    " call append(12," * ANY THIRD PARTY WHICH MAY BE USED BY, INCORPORATED IN, OR SUPPLIED WITH THE ")
+    " call append(13," * FANVIL SOFTWARE, AND BUYER AGREES TO LOOK ONLY TO SUCH THIRD PARTY FOR ANY")
+    " call append(14," * WARRANTY CLAIM RELATING THERETO. FANVIL SHALL ALSO NOT BE RESPONSIBLE FOR ")
+    " call append(15," * ANY FANVIL SOFTWARE RELEASES MADE TO BUYER'S SPECIFICATION OR TO CONFORM TO A")
+    " call append(16," * PARTICULAR STANDARD OR OPEN FORUM.")
+    " call append(17," *")
+    " call append(18," * BUYER'S SOLE AND EXCLUSIVE REMEDY AND FANVIL'S ENTIRE AND CUMULATIVE ")
+    " call append(19," * LIABILITY WITH RESPECT TO THE FANVIL SOFTWARE RELEASED HEREUNDER WILL BE, AT ")
+    " call append(20," * FANVIL'S OPTION, TO REVISE OR REPLACE THE FANVIL SOFTWARE AT ISSUE, OR REFUND")
+    " call append(21," * ANY SOFTWARE LICENSE FEES OR SERVICE CHARGE PAID BY BUYER TO FANVIL FOR SUCH ")
+    " call append(22," * FANVIL SOFTWARE AT ISSUE.")
+    " call append(23,"")
+    " call append(24," * THE TRANSACTION CONTEMPLATED HEREUNDER SHALL BE CONSTRUED IN ACCORDANCE WITH ")
+    " call append(25," * THE LAWS OF THE PEOPLE'S REPUBLIC OF CHINA(PRC), EXCLUDING ITS CONFLICT OF ")
+    " call append(26," * LAWS PRINCIPLES.")
+    " call append(27," *******************************************************************************")
+    " call append(28," */")
+    " call append(29,"")
+    " call append(30,"/*")
+    " call append(31," * Filename:       ".expand("%:t"))
+    " call append(32," * Author:         yiguo")
+    " call append(33," * Last Rev. Date: ".strftime("%Y/%m/%d %H:%M"))
+    " call append(34," * Description:    ")
+    " call append(35," */")
+
+    call append(0,"\/* =============================================================================================")
+    call append(1," * Filename       : ".expand("%:t"))
+    call append(2," * Author         : Mike Guo")
+    call append(3," * Last Rev. Date : ".strftime("%Y/%m/%d %H:%M"))
+    call append(4," * Description    : ")
+    call append(5," * =============================================================================================")
+    call append(6," */")
+    call append(7,"/***************************************** CONSTANTS  *****************************************/")
+    call append(8,"/***************************************** STRUCTURES *****************************************/")
+    call append(9,"/***************************************** FUNCTIONS  *****************************************/")
+endf
+
+" TODO: read the header from the template file; use a VIM script to do the job. 
+function _AddSourceFileHeader()
+    call append(0,"\/* =============================================================================================")
+    call append(1," * Filename       : ".expand("%:t"))
+    call append(2," * Author         : Mike Guo")
+    call append(3," * Last Rev. Date : ".strftime("%Y/%m/%d %H:%M"))
+    call append(4," * Description    : ")
+    call append(5," * =============================================================================================")
+    call append(6," */")
+endf
+
+" setline({lnum}, {text})
+function _UpdateFileHeader()
+    call setline(2," * Filename       : ".expand("%:t"))
+    call setline(4," * Last Rev. Date : ".strftime("%Y/%m/%d %H:%M"))
+endf
+
+function AddHeaderFileHeader()
+    let n = 1
+    while n <= 2
+        let line = getline(n)
+        if line =~ '^.*Filename.*$'
+            call _UpdateFileHeader()
+            return
+        endif
+        let n = n + 1
+    endwhile
+    call _AddHeaderFileHeader()
+endfunction
+
+" Check if the file header exists, then update or add a file header.
+" getline({lnum} [, {end}]), When {lnum} is smaller than 1 or bigger than the
+" number of lines in the buffer, an empty string is returned.
+" function AddSourceFileHeader()
+    " let n = 1
+    " while n <= 2
+        " let line = getline(n)
+        " if line =~ '^.*LEGAL.*$'
+            " call _UpdateFileHeader()
+            " return
+        " endif
+        " let n = n + 1
+    " endwhile
+    " call _AddSourceFileHeader()
+" endfunction
+function AddSourceFileHeader()
+    let n = 1
+    while n <= 2
+        let line = getline(n)
+        if line =~ '^.*Filename.*$'
+            call _UpdateFileHeader()
+            return
+        endif
+        let n = n + 1
+    endwhile
+    call _AddSourceFileHeader()
+endfunction
+
+"}}}
+
+" ----vim-latex
+"{{{
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+
+" To change the IMAP mappings which affect jumping between placeholders
+nmap <Leader>j <Plug>IMAP_JumpForward
+imap <Leader>j <Plug>IMAP_JumpForward
+xmap <Leader>j <Plug>IMAP_JumpForward
+"}}}
+
+" ----wildfire.vim
+" This selects the next closest text object.
+map <SPACE> <Plug>(wildfire-fuel)
+
+" This selects the previous closest text object.
+" vmap <C-SPACE> <Plug>(wildfire-water)
+
+" Wildfire selects any of the text objects i', i", i), i], i}, ip and it.
+let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "ip", "it", "i>"]
+
+" ----gundo
+nnoremap <Leader>ud :GundoToggle<CR>
+
+
+" ----minibufexplorer
+"{{{
+" Toggle the minibufexplorer
+" nmap mb :TMiniBufExplorer<CR>
+
+" Enable the optional mapping of Control + Vim Direction Keys [hjkl] to
+" window movement commands.
+" let g:miniBufExplMapWindowNavVim = 1
+" let g:miniBufExplMapWindowNavArrows = 1
+
+" Note: do NOT enable this option, since it makes the buffers not show up
+" with their highlighting.
+" There is a VIM bug that can cause buffers to show up without their 
+" highlighting. The following setting will cause MBE to try and turn
+" highlighting back on (introduced in 6.3.1):
+" let g:miniBufExplForceSyntaxEnable = 1
+
+" To enable the optional mapping of <C-TAB> and <C-S-TAB> to a function that 
+" will bring up the next or previous buffer in the current window.
+"let g:miniBufExplMapCTabSwitchBufs=1
+" Note: you can quickly purge the cache by pressing <F5> while inside CtrlP.
+"}}}
+
+" ----nerdtree
+"{{{
+" nnoremap <silent> tn :NERDTreeToggle<CR>
+"}}}
+
+" ----vim-signature
+"{{{
+"let g:SignatureMarkLeader = '<Leader>m'
+"}}}
+
+" ----YouCompleteMe
+"{{{
+" let g:ycm_global_ycm_extra_conf = '~/vimfiles/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" let g:ycm_server_use_vim_stdout = 1
+" let g:ycm_server_log_level = 'debug'
+"}}}
+
+" ----syntastic
+"{{{
+"let g:syntastic_mode_map = { 'mode': 'passive',
+"            \ 'active_filetypes': ['ruby', 'php'],
+"            \ 'passive_filetypes': ['puppet', 'c', 'cpp'] }
+"let g:syntastic_c_checkers = ['ycm']
+"let g:syntastic_cpp_checkers = ['ycm']
+"}}}
+"
+
+"---------Highlighting text exceeding 96 columns------------------
+" match long line, mll
+" see http://vim.wikia.com/wiki/Highlight_long_lines
+" highlight hll ctermbg=blue ctermfg=white guibg=#add8e6
+"unused highlight hll ctermbg=blue ctermfg=white guibg=lightblue
+" au BufWinEnter * let w:m1=matchadd('hll', '\%>96v.\+', -1)
+"unused au BufWinEnter * let w:m2=matchadd('Search', '\%<81v.\%>77v', -1)
+
+" Warning: do NOT use w/b/h/j/k/l as the start character of the map command.
+" nnoremap <silent> mll
+      " \ :if exists('w:m1') <Bar>
+      " \   silent! call matchdelete(w:m1) <Bar>
+      " \   unlet w:m1 <Bar>
+      " \ elseif &textwidth > 0 <Bar>
+      " \   let w:m1 = matchadd('hll', '\%>'.&tw.'v.\+', -1) <Bar>
+      " \ else <Bar>
+      " \   let w:m1 = matchadd('hll', '\%>96v.\+', -1) <Bar>
+      " \ endif<CR>
+
+"----------------------add cscope db------------------------------
+" An example for cscope.out is in working dir.
+" when pwd=/usr/bin/, findfile only finds files in /usr/ and /usr/bin/, but
+" can not find files in /usr/local/.
+" And if pwd is in a symbolic link to a dir, finddir and findfile can't return
+" the right string.
+"
+"function! LoadCscope()  
+"  let db = findfile("cscope.out", ".;")  
+"  if (!empty(db))  
+"    let path = strpart(db, 0, match(db, "/cscope.out$"))  
+"    set nocsverb " suppress 'duplicate connection' error  
+"    exe "cs add " . db . " " . path  
+"    set csverb  
+"  endif  
+"endfunction  
+"au BufEnter /* call LoadCscope() 
+
+" When cscope.out in an known dir
+"function! LoadCscope()  
+"   let db_dir = finddir("Cscope", ".;")  
+"   if (!empty(db_dir))  
+"       set nocsverb " suppress 'duplicate connection' error  
+"       exe "cs add " . db_dir . "/cscope.out"  
+"       set csverb
+"   endif  
+"endfunction  
+"au BufEnter /* call LoadCscope()
+
+" ----echofunc
+" "{{{
+" " Note: Based on ctags
+" let g:EchoFuncKeyNext='<C-e>'
+" " let g:EchoFuncKeyPrev='<C-b>'
+" let g:EchoFuncAutoStartBalloonDeclaration=0
+" let g:EchoFuncShowOnStatus = 1
+" let g:EchoFuncNotShowPathEnabled = 1
+" "}}}
+
+" " ----NrrwRgn
+" " <Leader>nr is used for lines selected in the visual mode. I don't like it,
+" " so remap it.
+" xmap <unique> <Leader>znr <Plug>NrrwrgnDo
+" " Select only the range that is visible for the current window.
+" nmap <Leader>nrw :NW<CR>
+" " The cursor in the original window will always update when the position changes
+" " in the narrowed window.
+" let g:nrrw_rgn_update_orig_win = 1
+" " Bug: only support prepare lines from top to bottom.
+" nmap <Leader>nrp :NRP<CR>
+" nmap <Leader>nrm :NRM<CR>
+" " For the region LAST selected in visual mode. 
+" xmap <Leader>nrv :NRV<CR>
+
+"------------------------FencView---------------------------------
+" Basically, you need this plugin only when you ran into some 
+" messy code. 
+" Use this command: :FencAutoDetect, or Try :FencView
+" to guess the encoding.
+" let g:fencview_autodetect=0
+
+"------------------------set tags--------------------------------
+" Vim will look for tags file everywhere starting from the current directory up 
+" to the root. 
+"set tags=tags; "when tags file in /usr/ but not in /usr/local/
+"set autochdir
+"function! SetTags()  
+"   let db_dir = finddir("Cscope", ".;")  
+"   if (!empty(db_dir))  
+"       exe "set tags=" . db_dir . "/tags"  
+"   endif  
+"endfunction  
+"au BufEnter /* call SetTags()
+
+" function! FindTags(file)
+    " let dir = fnamemodify(a:file, ":p:h")
+    " while 1
+        " let guess = dir . "/tags"
+        " if filereadable(guess)
+            " return [guess]
+        " elseif dir == '/'
+            " return [""]
+        " endif
+
+        " let dir = fnamemodify(dir, ":h")
+    " endwhile
+" endfunc
+
+" function! SetTags(file)
+    " let [dbfile] = FindTags(a:file)
+    " if dbfile == ""
+        " return
+    " else
+        " exe "set tags=" . dbfile
+    " endif
+" endfunc
+"au BufEnter * call SetTags(expand("<afile>"))
+
+"source ~/.vim/plugin/autotag.vim
+
+" YCM
+" menu
+highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
+" selected
+highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
+
+let g:ycm_auto_trigger = 0
+let g:ycm_complete_in_comments = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_collect_identifiers_from_tags_files = 1
+set tags+=/home/mike/kuaipan/ubuntu/softwares/vim/vimfiles/stdcpp_5_4.tags
+" 补全内容不以分割子窗口形式出现，只显示补全列表
+set completeopt-=preview
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_cache_omnifunc = 0
+let g:ycm_seed_identifiers_with_syntax = 1
+
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_echo_current_diagnostic = 0
+
