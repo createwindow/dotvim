@@ -3,9 +3,6 @@
 set -x
 
 LOCATION=`pwd`
-SYS_VIMRC_FILE=".vimrc"
-SYS_VIM_DIR=".vim"
-LOC_VIMRC_FILE="$LOCATION/vimrc"
 LOC_VIM_DIR="$LOCATION"
 CSUPPORT_TEMP_PRI_DIR="./bakfiles/c-support/templates"
 CSUPPORT_TEMP_PLU_DIR="./bundle/c.vim/c-support/templates"
@@ -27,31 +24,15 @@ VIMPROC_UNIX_MAK="make_unix.mak"
 #fi
 
 # compile vimproc
-cd $VIMPROC_DIR
-make -f $VIMPROC_UNIX_MAK
+if [ -d "$VIMPROC_DIR" ]; then
+    cd $VIMPROC_DIR
+    make -f $VIMPROC_UNIX_MAK
+else
+    echo "Error: $VIMPROC_DIR NOT exist! Please run VundleInstall first if you want use this plugin."
+fi
 
 # copy vim-latex suite config/template file to the specified dir.
 #cp ./bakfiles/tex.vim ./bundle/vim-latex/ftplugin
 #cp ./bakfiles/yiguo_cn.tex ./bundle/vim-latex/ftplugin/latex-suite/templates
 #cp ./bakfiles/envmacros.vim ./bundle/vim-latex/ftplugin/latex-suite
-
-# copy .indexer_files to $HOME
-cp ./bakfiles/.indexer_files $HOME
-
-# change the working directory to $HOME
-cd
-
-
-# remove .vimrc and .vim 
-if [ -f $SYS_VIMRC_FILE ]; then
-    rm $SYS_VIMRC_FILE
-fi
-if [ -h $SYS_VIM_DIR ]; then
-    rm $SYS_VIM_DIR
-fi
-
-# make symbolic links
-ln -s $LOC_VIMRC_FILE $SYS_VIMRC_FILE
-ln -s $LOC_VIM_DIR    $SYS_VIM_DIR
-
 
