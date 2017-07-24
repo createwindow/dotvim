@@ -1,4 +1,5 @@
 #!/bin/bash
+# git clone https://github.com/createwindow/dotvim.git
 
 set -x
 
@@ -10,6 +11,11 @@ LOC_VIM_DIR="$LOCATION"
 
 # copy .indexer_files to $HOME
 cp ./bakfiles/.indexer_files $HOME
+
+# install Vundle if NOT exist
+if [ !-d bundle/Vundle.vim ]; then
+    git clone https://github.com/VundleVim/Vundle.vim.git ./bundle/Vundle.vim
+fi
 
 # change the working directory to $HOME
 cd
