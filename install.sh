@@ -10,10 +10,10 @@ LOC_VIMRC_FILE="$LOCATION/vimrc"
 LOC_VIM_DIR="$LOCATION"
 
 # copy .indexer_files to $HOME
-cp ./bakfiles/.indexer_files $HOME
+cp ./backups/.indexer_files $HOME
 
 # install Vundle if NOT exist
-if [ !-d bundle/Vundle.vim ]; then
+if [ ! -d bundle/Vundle.vim ]; then
     git clone https://github.com/VundleVim/Vundle.vim.git ./bundle/Vundle.vim
 fi
 
