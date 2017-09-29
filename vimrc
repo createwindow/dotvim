@@ -31,8 +31,6 @@ Plugin 'createwindow/vim-lucius'
 Plugin 'Lokaltog/vim-easymotion'
 " nerdcommenter
 Plugin 'scrooloose/nerdcommenter'
-" ctrlp
-Plugin 'ctrlpvim/ctrlp.vim'
 " tagbar
 Plugin 'majutsushi/tagbar'
 " vimScripts_after_syntax_c
@@ -50,8 +48,15 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'gcmt/wildfire.vim'
 " undo
 Plugin 'sjl/gundo.vim'
+" dracula colorscheme
+Plugin 'dracula/vim'
+" replace ctrlp
+Plugin 'Yggdroot/LeaderF'
+
+" ctrlp
+" Plugin 'ctrlpvim/ctrlp.vim'
 " colorschemes 
-"Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
 " YouCompleteMe
 " Plugin 'Valloric/YouCompleteMe'
 " Plugin 'rdnetto/YCM-Generator'

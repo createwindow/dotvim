@@ -74,18 +74,19 @@ set completeopt=longest,menu
 let mapleader = ","
 
 augroup quickfixWinOpen
-    autocmd QuickFixCmdPost * botright copen 8
+    autocmd QuickFixCmdPost * botright copen 12
 augroup END
 
 " set background=light
 " colorscheme solarized
 
-colorscheme lucius
+" colorscheme lucius
 " LuciusLightLowContrast
 " LuciusWhite
 " LuciusLight
 " LuciusDark
-LuciusDarkLowContrast
+" LuciusDarkLowContrast
+color dracula
 
 if exists('+colorcolumn')
   set colorcolumn=96
@@ -249,60 +250,74 @@ hi link EasyMotionShade  Comment
 nnoremap <silent><F3> :Rgrep<CR>
 let Grep_Default_Filelist = '*.c *.cpp *.java *.asm *.h *.txt' 
 
-" ----ctrlp
-"{{{
-" Open CtrlP in find buffer mode.
-nmap <leader>b :CtrlPBuffer<CR>
+" " ----ctrlp
+" "{{{
+" " Open CtrlP in find buffer mode.
+" nmap <leader>b :CtrlPBuffer<CR>
 
-" Set this to 1 to set regexp search as the default: >
-let g:ctrlp_regexp = 1
-" search by filename (as opposed to full path)
-let g:ctrlp_by_filename = 1 
-" c - the directory of the current file.
-" a - like "c", but only applies when the current working directory outside of
-" CtrlP isn't a direct ancestor of the directory of the current file.
-" r - the nearest ancestor that contains one of these directories or files:
-" .git .hg .svn .bzr _darcs
-" w - begin finding a root from the current working directory outside of CtrlP
-" instead of from the directory of the current file (default). Only applies
-" when "r" is also present.
-" 0 or <empty> - disable this feature.
-let g:ctrlp_working_path_mode = 'ra' 
-let g:ctrlp_extensions = ['bookmarkdir']
-let g:ctrlp_match_window = 'max:20,results:20'
+" " Set this to 1 to set regexp search as the default: >
+" let g:ctrlp_regexp = 1
+" " search by filename (as opposed to full path)
+" let g:ctrlp_by_filename = 1 
+" " c - the directory of the current file.
+" " a - like "c", but only applies when the current working directory outside of
+" " CtrlP isn't a direct ancestor of the directory of the current file.
+" " r - the nearest ancestor that contains one of these directories or files:
+" " .git .hg .svn .bzr _darcs
+" " w - begin finding a root from the current working directory outside of CtrlP
+" " instead of from the directory of the current file (default). Only applies
+" " when "r" is also present.
+" " 0 or <empty> - disable this feature.
+" let g:ctrlp_working_path_mode = 'ra' 
+" let g:ctrlp_extensions = ['bookmarkdir']
+" let g:ctrlp_match_window = 'max:20,results:20'
 
-" delete buffers <c-l>. Disable the key mapping already use in CtrlP, then use
-" it to delete buffers.
-let g:ctrlp_prompt_mappings = { 'PrtCurRight()': ['<right>'] }
-let g:ctrlp_buffer_func = { 'enter': 'MyCtrlPMappings' }
-func! MyCtrlPMappings()
-    nnoremap <buffer> <silent> <c-l> :call <sid>DeleteBuffer()<cr>
-endfunc
-func! s:DeleteBuffer()
-    let line = getline('.')
-    let bufid = line =~ '\[\d\+\*No Name\]$' ? str2nr(matchstr(line, '\d\+'))
-        \ : fnamemodify(line[2:], ':p')
-    exec "bd" bufid
-    exec "norm \<F5>"
-endfunc
-"}}}
+" " delete buffers <c-l>. Disable the key mapping already use in CtrlP, then use
+" " it to delete buffers.
+" let g:ctrlp_prompt_mappings = { 'PrtCurRight()': ['<right>'] }
+" let g:ctrlp_buffer_func = { 'enter': 'MyCtrlPMappings' }
+" func! MyCtrlPMappings()
+    " nnoremap <buffer> <silent> <c-l> :call <sid>DeleteBuffer()<cr>
+" endfunc
+" func! s:DeleteBuffer()
+    " let line = getline('.')
+    " let bufid = line =~ '\[\d\+\*No Name\]$' ? str2nr(matchstr(line, '\d\+'))
+        " \ : fnamemodify(line[2:], ':p')
+    " exec "bd" bufid
+    " exec "norm \<F5>"
+" endfunc
+" "}}}
 
-" Use Silver Searcher for CtrlP plugin (if available) Fallback to git ls-files 
-" for fast listing. Because we use fast strategies, disable caching.
-" Ignore the VCS ignore files of one dir automatically. You should set up a
-" global .agignore file to ignore what you want to, since adding ignore
-" options to greprg or ctrlp_user_command does NOT work.
-if executable('ag')
-    " let g:ctrlp_use_caching = 0
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
+" " Use Silver Searcher for CtrlP plugin (if available) Fallback to git ls-files 
+" " for fast listing. Because we use fast strategies, disable caching.
+" " Ignore the VCS ignore files of one dir automatically. You should set up a
+" " global .agignore file to ignore what you want to, since adding ignore
+" " options to greprg or ctrlp_user_command does NOT work.
+" if executable('ag')
+    " " let g:ctrlp_use_caching = 0
+    " set grepprg=ag\ --nogroup\ --nocolor
+    " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" endif
  
-" does not apply when a command defined with |g:ctrlp_user_command| is being used.
-" let g:ctrlp_custom_ignore = {
-  " \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  " \ 'file': '\v\.(d|o)$',
-  " \ }
+" " does not apply when a command defined with |g:ctrlp_user_command| is being used.
+" " let g:ctrlp_custom_ignore = {
+  " " \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  " " \ 'file': '\v\.(d|o)$',
+  " " \ }
+
+" ----LeaderF
+let g:Lf_ShortcutF = '<C-P>'
+nnoremap <silent> <Leader>t :LeaderfBufTag<CR>
+nnoremap <silent> <Leader>m :LeaderfMru<CR>
+nnoremap <silent> <Leader>h :LeaderfHistoryCmd<CR>
+" LeaderfFunctionAll
+" LeaderfFunction
+" LeaderfColorscheme
+
+let g:Lf_WildIgnore = {
+    \ 'dir': ['.svn','.git','.hg'],
+    \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.a','*.bin','*.wav','*.pcm','*yuv','*.rtp','*.d','gtags.files','GRTAGS','GTAGS','GPATH']
+    \}
 
 " ----indexer
 "{{{

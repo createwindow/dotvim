@@ -21,7 +21,7 @@ fi
 cd
 
 # remove .vimrc and .vim 
-if [ -f $SYS_VIMRC_FILE ]; then
+if [ -h $SYS_VIMRC_FILE ]; then
     rm $SYS_VIMRC_FILE
 fi
 if [ -h $SYS_VIM_DIR ]; then
