@@ -305,17 +305,16 @@ let Grep_Default_Filelist = '*.c *.cpp *.java *.asm *.h *.txt'
   " " \ 'file': '\v\.(d|o)$',
   " " \ }
 
-" ----LeaderF
+" ----oLeaderF
 let g:Lf_ShortcutF = '<C-P>'
+let g:Lf_UseVersionControlTool = 0
 nnoremap <silent> <Leader>t :LeaderfBufTag<CR>
+nnoremap <silent> <Leader>l :LeaderfLine<CR>
 nnoremap <silent> <Leader>m :LeaderfMru<CR>
 nnoremap <silent> <Leader>h :LeaderfHistoryCmd<CR>
-" LeaderfFunctionAll
-" LeaderfFunction
-" LeaderfColorscheme
 
 let g:Lf_WildIgnore = {
-    \ 'dir': ['.svn','.git','.hg'],
+    \ 'dir': ['.svn','.git','.hg','chromium/src/third_party/webrtc'],
     \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.a','*.bin','*.wav','*.pcm','*yuv','*.rtp','*.d','gtags.files','GRTAGS','GTAGS','GPATH']
     \}
 
