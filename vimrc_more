@@ -308,6 +308,8 @@ let Grep_Default_Filelist = '*.c *.cpp *.java *.asm *.h *.txt'
 " ----oLeaderF
 let g:Lf_ShortcutF = '<C-P>'
 let g:Lf_UseVersionControlTool = 0
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_RootMarkers = ['.git', '.hg', '.svn']
 nnoremap <silent> <Leader>t :LeaderfBufTag<CR>
 nnoremap <silent> <Leader>l :LeaderfLine<CR>
 nnoremap <silent> <Leader>m :LeaderfMru<CR>

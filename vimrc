@@ -24,9 +24,7 @@ Plugin 'vim-scripts/grep.vim'
 " Plugin 'vim-scripts/indexer.tar.gz'
 " YankRing.vim
 Plugin 'vim-scripts/YankRing.vim'
-" vim-lucius
-"Plugin 'jonathanfilip/vim-lucius'
-Plugin 'createwindow/vim-lucius'
+
 " easymotion
 Plugin 'Lokaltog/vim-easymotion'
 " nerdcommenter
@@ -52,6 +50,9 @@ Plugin 'sjl/gundo.vim'
 Plugin 'dracula/vim'
 " replace ctrlp
 Plugin 'Yggdroot/LeaderF'
+" vim-lucius
+"Plugin 'jonathanfilip/vim-lucius'
+" Plugin 'createwindow/vim-lucius'
 
 " ctrlp
 " Plugin 'ctrlpvim/ctrlp.vim'
