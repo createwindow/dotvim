@@ -99,8 +99,9 @@ noremap <C-K> <C-W>k
 noremap <C-H> <C-W>h
 noremap <C-L> <C-W>l
 
-"------------------------set tags--------------------------------
-nnoremap <esc> :nohl<cr>
+"-----------------------remove highlights--------------------------
+" nnoremap <esc> :nohl<cr> " cause a problem when using vim
+nnoremap <silent> <C-l> :<C-u>nohl<CR><C-l>
 
 " "------------------------ctrl+j to exit insert mode--------------
 " imap <C-j> <ESC> " not good for cppman
