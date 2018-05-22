@@ -5,8 +5,10 @@ set -x
 
 LOCATION=`pwd`
 SYS_VIMRC_FILE=".vimrc"
+SYS_IDEAVIMRC_FILE=".ideavimrc"
 SYS_VIM_DIR=".vim"
 LOC_VIMRC_FILE="$LOCATION/vimrc"
+LOC_IDEAVIMRC_FILE="$LOCATION/ideavimrc"
 LOC_VIM_DIR="$LOCATION"
 
 # copy .indexer_files to $HOME
@@ -28,7 +30,12 @@ if [ -h $SYS_VIM_DIR ]; then
     rm $SYS_VIM_DIR
 fi
 
+if [ -h $SYS_IDEAVIMRC_FILE ]; then
+    rm $SYS_IDEAVIMRC_FILE
+fi
+
 # make symbolic links
-ln -s $LOC_VIMRC_FILE $SYS_VIMRC_FILE
-ln -s $LOC_VIM_DIR    $SYS_VIM_DIR
+ln -s $LOC_VIMRC_FILE     $SYS_VIMRC_FILE
+ln -s $LOC_VIM_DIR        $SYS_VIM_DIR
+ln -s $LOC_IDEAVIMRC_FILE $SYS_IDEAVIMRC_FILE
 
