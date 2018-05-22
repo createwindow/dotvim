@@ -10,17 +10,11 @@ set showcmd		    " display incomplete commands
 set incsearch		" do incremental searching
 set wildmenu        " show a navigable menu for tab completion
 set number
-" set tabstop=4
-" set shiftwidth=4
-" set expandtab
-" set softtabstop=4
-"
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
-set softtabstop=2
+set softtabstop=4
 set smarttab
-
 set ch=2            " Make command line two lines high
 set encoding=utf-8
 let &termencoding=&encoding
@@ -50,11 +44,10 @@ syntax enable
 if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
-  " set guifont=Monospace\ 9
-  set guifont=Monaco:h10
+  set guifont=Monospace\ 9
   " set guifont=Anonymous\ Pro:h11
   " set gfw=Microsoft\ YaHei "guifontwide
-  " set gfw=NSimSun "guifontwide fc-list :lang=zh-cn
+  set gfw=NSimSun "guifontwide fc-list :lang=zh-cn
   " no scroll bar
   set guioptions-=l
   set guioptions-=L
@@ -315,7 +308,7 @@ let Grep_Default_Filelist = '*.c *.cpp *.java *.asm *.h *.txt'
 " ----oLeaderF
 let g:Lf_ShortcutF = '<C-P>'
 let g:Lf_UseVersionControlTool = 0
-" let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WorkingDirectoryMode = 'Ac'
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn']
 nnoremap <silent> <Leader>t :LeaderfBufTag<CR>
 nnoremap <silent> <Leader>l :LeaderfLine<CR>
@@ -548,23 +541,23 @@ endfunction
 
 "}}}
 
-" " ----vim-latex
-" "{{{
-" " IMPORTANT: grep will sometimes skip displaying the file name if you
-" " search in a singe file. This will confuse Latex-Suite. Set your grep
-" " program to always generate a file-name.
-" set grepprg=grep\ -nH\ $*
+" ----vim-latex
+"{{{
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
 
-" " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-" " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" " The following changes the default filetype back to 'tex':
-" let g:tex_flavor='latex'
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
 
-" " To change the IMAP mappings which affect jumping between placeholders
-" nmap <Leader>j <Plug>IMAP_JumpForward
-" imap <Leader>j <Plug>IMAP_JumpForward
-" xmap <Leader>j <Plug>IMAP_JumpForward
-" "}}}
+" To change the IMAP mappings which affect jumping between placeholders
+nmap <Leader>j <Plug>IMAP_JumpForward
+imap <Leader>j <Plug>IMAP_JumpForward
+xmap <Leader>j <Plug>IMAP_JumpForward
+"}}}
 
 " ----wildfire.vim
 " This selects the next closest text object.
@@ -750,24 +743,24 @@ nnoremap <Leader>ud :GundoToggle<CR>
 
 "source ~/.vim/plugin/autotag.vim
 
-"-------------------------- YCM --------------------------------
-" " menu
-" highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
-" " selected
-" highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
+" YCM
+" menu
+highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
+" selected
+highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
 
-" let g:ycm_auto_trigger = 0
-" let g:ycm_complete_in_comments = 1
-" let g:ycm_confirm_extra_conf = 0
-" let g:ycm_collect_identifiers_from_tags_files = 1
-" set tags+=/home/mike/kuaipan/ubuntu/softwares/vim/vimfiles/stdcpp_5_4.tags
-" " 补全内容不以分割子窗口形式出现，只显示补全列表
-" set completeopt-=preview
-" let g:ycm_min_num_of_chars_for_completion = 1
-" let g:ycm_cache_omnifunc = 0
-" let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_auto_trigger = 0
+let g:ycm_complete_in_comments = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_collect_identifiers_from_tags_files = 1
+set tags+=/home/mike/kuaipan/ubuntu/softwares/vim/vimfiles/stdcpp_5_4.tags
+" 补全内容不以分割子窗口形式出现，只显示补全列表
+set completeopt-=preview
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_cache_omnifunc = 0
+let g:ycm_seed_identifiers_with_syntax = 1
 
-" let g:ycm_enable_diagnostic_signs = 0
-" let g:ycm_enable_diagnostic_highlighting = 0
-" let g:ycm_echo_current_diagnostic = 0
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_echo_current_diagnostic = 0
 
