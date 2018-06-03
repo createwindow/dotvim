@@ -42,6 +42,8 @@ set statusline+=%= "Separation point between left and right aligned items
 set statusline+=\ %-24.24(%l-%L,%c%) "minwid, maxwidth=24, '(','%)'for setting width and alignment
 set statusline+=%3p%% "Percentage through file in lines
 
+" set clipboard=unnamed
+
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -108,7 +110,10 @@ noremap <C-L> <C-W>l
 
 "-----------------------remove highlights--------------------------
 " nnoremap <esc> :nohl<cr> " cause a problem when using vim
-nnoremap <silent> <C-l> :<C-u>nohl<CR><C-l>
+nnoremap <silent> <leader>c :<C-u>nohl<CR><C-l>
+
+"-----------------------yank file name/path--------------------------
+nmap <leader>f :!echo % \| pbcopy <CR><CR>
 
 " "------------------------ctrl+j to exit insert mode--------------
 " imap <C-j> <ESC> " not good for cppman
