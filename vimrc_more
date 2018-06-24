@@ -102,6 +102,11 @@ if exists('+colorcolumn')
   highlight ColorColumn ctermbg=blue ctermfg=white guibg=#dedede
 endif
 
+
+"----------------------------ctag jump---------------------------
+" show candidates if more than one exists; jump to it, if there's one.
+map <c-]> g<c-]>
+
 "----------------------move cursor to windows--------------------
 noremap <C-J> <C-W>j
 noremap <C-K> <C-W>k
