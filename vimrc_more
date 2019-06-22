@@ -269,7 +269,7 @@ nnoremap <silent><F3> :Rgrep<CR>
 let Grep_Default_Filelist = '*.c *.cpp *.java *.asm *.h *.txt' 
 
 " " ----ctrlp
-" "{{{
+"{{{
 " " Open CtrlP in find buffer mode.
 " nmap <leader>b :CtrlPBuffer<CR>
 
@@ -304,7 +304,7 @@ let Grep_Default_Filelist = '*.c *.cpp *.java *.asm *.h *.txt'
     " exec "bd" bufid
     " exec "norm \<F5>"
 " endfunc
-" "}}}
+"}}}
 
 " " Use Silver Searcher for CtrlP plugin (if available) Fallback to git ls-files 
 " " for fast listing. Because we use fast strategies, disable caching.
@@ -323,7 +323,7 @@ let Grep_Default_Filelist = '*.c *.cpp *.java *.asm *.h *.txt'
   " " \ 'file': '\v\.(d|o)$',
   " " \ }
 
-" ----oLeaderF
+" ----LeaderF
 let g:Lf_ShortcutF = '<C-P>'
 let g:Lf_UseVersionControlTool = 0
 " let g:Lf_WorkingDirectoryMode = 'Ac'
@@ -333,10 +333,10 @@ nnoremap <silent> <Leader>l :LeaderfLine<CR>
 nnoremap <silent> <Leader>m :LeaderfMru<CR>
 nnoremap <silent> <Leader>h :LeaderfHistoryCmd<CR>
 
-let g:Lf_WildIgnore = {
-    \ 'dir': ['.svn','.git','.hg','chromium/src/third_party/webrtc'],
-    \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.a','*.bin','*.wav','*.pcm','*yuv','*.rtp','*.d','gtags.files','GRTAGS','GTAGS','GPATH']
-    \}
+" let g:Lf_WildIgnore = {
+    " \ 'dir': ['.svn','.git','.hg','chromium/src/third_party/webrtc'],
+    " \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]','*.a','*.bin','*.wav','*.pcm','*yuv','*.rtp','*.d','gtags.files','GRTAGS','GTAGS','GPATH']
+    " \}
 
 " ----indexer
 "{{{
