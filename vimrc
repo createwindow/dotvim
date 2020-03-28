@@ -40,8 +40,8 @@ Plugin 'createwindow/vimScripts_manpageview.vim'
 "Plugin 'createwindow/vim-latex'
 " delimitMate
 Plugin 'Raimondi/delimitMate'
-" auto-pairs
-Plugin 'jiangmiao/auto-pairs'
+" " auto-pairs
+" Plugin 'jiangmiao/auto-pairs'
 " cpp highlight 
 Plugin 'octol/vim-cpp-enhanced-highlight'
 " Smart selection of the closest text object
