@@ -331,13 +331,22 @@ let Grep_Default_Filelist = '*.c *.cpp *.java *.asm *.h *.txt'
 
 " ----LeaderF
 let g:Lf_ShortcutF = '<C-P>'
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
 let g:Lf_UseVersionControlTool = 0
+let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
+let g:Lf_AutoResize = 1
+
 " let g:Lf_WorkingDirectoryMode = 'Ac'
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn']
 nnoremap <silent> <Leader>t :LeaderfBufTag<CR>
 nnoremap <silent> <Leader>l :LeaderfLine<CR>
 nnoremap <silent> <Leader>m :LeaderfMru<CR>
 nnoremap <silent> <Leader>h :LeaderfHistoryCmd<CR>
+
+" search word under cursor literally only in current buffer
+noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR>
+
 
 " let g:Lf_WildIgnore = {
     " \ 'dir': ['.svn','.git','.hg','chromium/src/third_party/webrtc'],
